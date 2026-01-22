@@ -10,11 +10,18 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 
 const app = express();
+
+await connectDB();
+
 const port = process.env.PORT || 3000;
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:5000", "https://thumblify-mauve.vercel.app"],
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:5000",
+      "https://thumblify-mauve.vercel.app",
+    ],
     credentials: true,
   }),
 );
@@ -27,7 +34,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 1000 * 60 * 60 * 24 * 7, // one week 
+      maxAge: 1000 * 60 * 60 * 24 * 7, // one week
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
@@ -49,10 +56,6 @@ app.use("/api/user", userRouter);
 app.use(errorMiddleware);
 
 app.get("/", (req, res) => {
-  res.send("Hello world");
+  res.send("Server is running...");
 });
-connectDB().then(
-  app.listen(port, () => {
-    console.log(`Server running on port: ${port}`);
-  }),
-);
+export default app;

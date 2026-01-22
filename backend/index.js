@@ -50,11 +50,18 @@ app.use(errorMiddleware);
 app.get("/", (req, res) => {
   res.send("Hello world");
 });
-connectDB().then(
-  app.listen(port, () => {
-    console.log(`Server running on port: ${port}`);
-  }),
-);
+
+if (process.env.NODE_ENV !== "production") {
+  // Call it here for local development
+  connectDB().then(() => {
+    app.listen(port, () => {
+      console.log(`Server running on port: ${port}`);
+    });
+  });
+} else {
+  // Call it here for production (Vercel)
+  connectDB();
+}
 
 // THIS IS THE MOST IMPORTANT LINE FOR VERCEL
 export default app;

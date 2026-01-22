@@ -14,6 +14,7 @@ const port = process.env.PORT || 3000;
 
 app.use(
   cors({
+    origin: ["http://localhost:5173", "http://localhost:5000", "https://thumblify-mauve.vercel.app"],
     credentials: true,
   }),
 );
@@ -27,10 +28,10 @@ app.use(
     saveUninitialized: false,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 7, // one week 
-      // httpOnly: true,
-      // secure: process.env.NODE_ENV === "production",
-      // sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      // path: "/",
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      path: "/",
     },
     store: MongoStore.create({
       mongoUrl: process.env.MONGODB_URI,
@@ -50,18 +51,10 @@ app.use(errorMiddleware);
 app.get("/", (req, res) => {
   res.send("Hello world");
 });
+connectDB().then(
+  app.listen(port, () => {
+    console.log(`Server running on port: ${port}`);
+  }),
+);
 
-if (process.env.NODE_ENV !== "production") {
-  // Call it here for local development
-  connectDB().then(() => {
-    app.listen(port, () => {
-      console.log(`Server running on port: ${port}`);
-    });
-  });
-} else {
-  // Call it here for production (Vercel)
-  connectDB();
-}
-
-// THIS IS THE MOST IMPORTANT LINE FOR VERCEL
 export default app;

@@ -12,9 +12,11 @@ Perfect for **YouTubers, marketers, and content creators** who want professional
 ---
 ## 🌐 Live Demo & Repository
 
-🔗 **Live Demo:** [Thumblify](https://tm-manager-silk.vercel.app/)
+🔗 **Live Demo:** [Thumblify](https://thumblify-mauve.vercel.app)
 
 🔗 **GitHub Repository:** [https://github.com/Sumit444-commits/Thumblify](https://github.com/Sumit444-commits/Thumblify)
+
+
 ---
 
 ## 📸 Preview

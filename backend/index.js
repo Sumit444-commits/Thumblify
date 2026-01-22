@@ -55,3 +55,6 @@ connectDB().then(
     console.log(`Server running on port: ${port}`);
   }),
 );
+
+// THIS IS THE MOST IMPORTANT LINE FOR VERCEL
+export default app;

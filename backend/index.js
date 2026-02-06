@@ -14,7 +14,7 @@ const port = process.env.PORT || 3000;
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:5000", "https://thumblify-mauve.vercel.app"],
+    origin: [process.env.FRONTEND_URI, process.env.BACKEND_URI],
     credentials: true,
   }),
 );
@@ -51,6 +51,7 @@ app.use(errorMiddleware);
 app.get("/", (req, res) => {
   res.send("Hello world");
 });
+
 connectDB().then(
   app.listen(port, () => {
     console.log(`Server running on port: ${port}`);

@@ -96,7 +96,7 @@ const Generate = () => {
                     Create Your Thumbnail
                   </h2>
                   <p className="text-sm text-zinc-400">
-                    Describe your vision and let A1 bring it to life
+                    Describe your vision and let AI bring it to life
                   </p>
                 </div>
 
